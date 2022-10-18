@@ -6,7 +6,6 @@ use Nette\Application\Responses\JsonResponse;
 use Nette\Http\IRequest;
 use Nette\Http\Request;
 use Nette\Http\UrlScript;
-use Nette\Reflection\Property;
 use Nette\Routing\Router;
 
 /**
@@ -61,7 +60,7 @@ class OnResponseHandler
 				$httpRequest = new Request($url);
 
 				if ($this->router->match($httpRequest) !== NULL) {
-					$prop = new Property('Nette\Application\Application', 'httpRequest');
+				    $prop = new \ReflectionProperty(\Nette\Application\Application::class, 'httpRequest');
 					$prop->setAccessible(TRUE);
 					$prop->setValue($application, $httpRequest);
 
